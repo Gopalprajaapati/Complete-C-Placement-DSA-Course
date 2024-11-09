@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": ".",
-      "program": "build/Debug/outDebug",
+      "cwd": "d:/gopal study/DSA pratical/Day_44_linkedlist_its_list_type",
+      "program": "d:/gopal study/DSA pratical/Day_44_linkedlist_its_list_type/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
