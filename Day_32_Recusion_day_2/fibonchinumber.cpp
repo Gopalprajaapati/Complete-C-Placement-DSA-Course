@@ -18,7 +18,6 @@ int fib(int n)
 
     //  proessing 
     n = fib(n - 1) + fib(n - 2);
-
     //  recusion call
     return n;
 }

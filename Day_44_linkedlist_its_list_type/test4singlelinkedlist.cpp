@@ -3,121 +3,154 @@ using namespace std;
 
 class Node
 {
-public:
+    public:
     int data;
-    Node *next;
+    Node* next;
     Node(int data)
     {
-        this->data = data;
-        this->next = NULL;
+        this->data= data;
+        this->next=NULL;
     }
+
 };
 
-void insertAthead(Node *&head, Node *&tail, int d)
+void   inserAthead(Node* &head,Node* &tail, int d)
 {
-    Node *temp = new Node(d);
-    if (head == NULL)
+    Node* temp = new Node(d);
+    if(head == NULL)
     {
         head = temp;
-        tail = temp;
-    }
-    else
-    {
+        tail= temp;
+    }else{
         temp->next = head;
-        head = temp;
+        head= temp;
     }
 }
 
-void insertAttail(Node *&tail, Node *&head, int d)
+void inserAttail(Node* &head, Node* &tail,int d)
 {
-    Node *temp = new Node(d);
-    if (tail == NULL)
+    Node* temp = new Node(d);
+    if (tail ==NULL)
     {
         head = temp;
         tail = temp;
-    }
-    else
+    }else
     {
-        tail->next = temp; // Append the new node at the end
-        tail = temp;       // Update the tail pointer
+        tail->next = temp;
+        tail = temp;
     }
+    
+
 }
 
-void print(Node *&head)
+void inserAtposition(Node* head, Node* &tail, int position, int d)
 {
-    Node *temp = head;
-
-    while (temp != NULL)
-    {
-        cout << temp->data << " ";
-        temp = temp->next;
-    }
-    cout << endl;
-}
-
-void insertAtPosition(Node *&head, Node *&tail, int position, int d)
-{
-    // Insert at the head
+   
     if (position == 1)
     {
-        insertAthead(head, tail, d);
+        inserAthead(head,tail,d);
         return;
     }
-
-    Node *temp = head;
+  
+    Node* temp = head;
     int cnt = 1;
+    while (cnt <position-1 && temp !=NULL)
+    {
+        temp = temp->next ;
+        cnt ++;
+    }
+   if (temp == NULL) {
+        cout << "Position out of bounds" << endl;
+        return;
+    }
+    
+    Node* nodeIndex = new Node(d);
+    nodeIndex->next = temp->next;
+    temp->next = nodeIndex;
 
-    // Traverse to the position before the desired index
-    while (cnt < position - 1 && temp != NULL)
+    if (nodeIndex->next == NULL)
+    {
+      tail = nodeIndex;
+     
+    }
+    
+    
+}
+
+void insertAtpositiondelete(Node* &head, Node* &tail, int position )
+{
+    if (head == NULL)
+    {
+        cout << "out bound list";
+    }
+    if (position == 1)
+    {
+        Node* temp = head;
+        head = head->next;
+        if (head= NULL)
+        {
+           tail = NULL;
+        }
+        delete temp;
+        return;
+        
+    }
+    
+
+    Node* temp = head;
+    int cnt = 1;
+    while (cnt < position-1 && temp !=NULL)
     {
         temp = temp->next;
         cnt++;
     }
-
-    // If inserting at the end or beyond
-    if (temp == NULL || temp->next == NULL)
+    
+    if (temp->next == NULL && temp !=NULL)
     {
-        insertAttail(tail, head, d);
-        return;
+      cout << "position out of bound";
     }
+    
+    Node* nodeIndexdeleted =temp->next;
 
-    // Insert in the middle
-    Node *nodeIndex = new Node(d);
-    nodeIndex->next = temp->next;
-    temp->next = nodeIndex;
+    temp->next = nodeIndexdeleted->next;
+
+    if (temp->next = NULL)
+    {
+       tail = temp;
+    }
+    delete nodeIndexdeleted;
+
+    
 }
 
+void print(Node* head){
+        if (head == NULL) {
+        cout << "List is empty" << endl;
+        return;
+    }
+    Node* temp = head;
+
+    while (temp!= NULL )
+    {
+        cout << temp->data <<" ";
+        temp = temp->next;        
+    }
+    
+}
 int main()
 {
-    Node *head = NULL;
-    Node *tail = NULL;
-
-    insertAthead(head, tail, 10);
+   
+    Node* head= NULL;
+    Node* tail = NULL;
+    inserAthead(head,tail,10);
+    inserAthead(head,tail,20);
+    inserAthead(head,tail,30);
+  
+    inserAttail(head,tail,40);
+    inserAttail(head,tail,50);
+    inserAttail(head,tail,60);
+      // Insert nodes at specific positions
+    inserAtposition(head, tail, 2, 100); // Insert ṇt position 2
+    inserAtposition(head, tail, 10, 200); // Position out of bounds
     print(head);
-
-    insertAthead(head, tail, 20);
-    print(head);
-
-    insertAthead(head, tail, 30);
-    print(head);
-
-    insertAttail(tail, head, 90);
-    print(head);
-
-    insertAttail(tail, head, 100);
-    print(head);
-
-    insertAttail(tail, head, 120);
-    print(head);
-
-    insertAtPosition(head, tail, 2, 65);
-    print(head);
-
-    insertAtPosition(head, tail, 1, 5);
-    print(head);
-
-    insertAtPosition(head, tail, 10, 150);
-    print(head);
-
-    return 0;
 }
