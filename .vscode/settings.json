@@ -8,7 +8,8 @@
     "random": "cpp",
     "ostream": "cpp",
     "string": "cpp",
-    "new": "cpp"
+    "new": "cpp",
+    "signallistcpp": "cpp"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
