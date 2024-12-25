@@ -1,79 +1,78 @@
 #include <iostream>
 using namespace std;
 
-class teststacke
+class TestStack
 {
 private:
-   int size;
-   int *arr;
-   int top;
+    int size;
+    int *arr;
+    int top;
+
 public:
-
-    teststacke(int size)
+    TestStack(int size)
     {
-        top = -1;
-        arr = new int[size];
         this->size = size;
-
+        arr = new int[size];
+        top = -1;
     }
-    ~teststacke()
+
+    ~TestStack()
     {
         delete[] arr;
     }
+
     void push(int element)
     {
-        if (top-size >1)
+        if (top < size - 1) // Check if the stack has space
         {
             top++;
-            arr[size] = element;
-            
+            arr[top] = element;
         }
-        else{
-            cout << "Stack is overflow :"<<endl;
+        else
+        {
+            cout << "Stack overflow" << endl;
         }
-        
     }
 
     void pop()
     {
-        if (top >=0)
+        if (top >= 0) // Check if the stack has elements
         {
             top--;
-        }else
-        {
-            cout << "Stack is underflow : "<<endl;
         }
-           
+        else
+        {
+            cout << "Stack underflow" << endl;
+        }
     }
 
     int peek()
     {
-        if (top >=0)
+        if (top >= 0)
         {
             return arr[top];
         }
-        else{
-            cout << "Stack is empty:" <<endl;
+        else
+        {
+            cout << "Stack is empty" << endl;
             return -1;
         }
-        
     }
-    bool isempty()
-    {   
+
+    bool isEmpty()
+    {
         return top == -1;
     }
 
     int currentSize()
     {
-        return top+1;
+        return top + 1;
     }
-
 };
 
 int main()
 {
-    teststacke s(5);
-   // Create a stack of size 5
+    TestStack s(5); // Create a stack of size 5
 
     s.push(10);
     s.push(20);
@@ -83,22 +82,24 @@ int main()
     cout << "Top element: " << s.peek() << endl;
 
     int size = s.currentSize();
-    int arr[size];
+    int *arr = new int[size];
 
     // Transfer stack elements to the array
-    for (int i = size - 1; i >= 0; --i) {
+    for (int i = size - 1; i >= 0; --i)
+    {
         arr[i] = s.peek();
         s.pop();
     }
 
     // Print the array
     cout << "Array elements: ";
-    for (int i = 0; i < size; ++i) {
+    for (int i = 0; i < size; ++i)
+    {
         cout << arr[i] << " ";
     }
     cout << endl;
 
+    delete[] arr; // Free the dynamically allocated array
+
     return 0;
 }
-
-
