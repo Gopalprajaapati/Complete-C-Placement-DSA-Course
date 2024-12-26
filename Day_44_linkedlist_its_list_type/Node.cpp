@@ -129,6 +129,52 @@ void deleteByPosition(Node *&head, Node *&tail, int position)
     delete curr;
 }
 
+void deleteByValue(Node *&head, Node *&tail, int value)
+{
+    if (head ==NULL)
+    {
+       cout << "Linked list empty";
+       return;
+    }
+    if (head->data == value)
+    {
+        Node *temp = head;
+        head = head->next;
+        delete temp;
+        if (head == NULL)
+        {
+            tail = NULL;
+        }
+        return;
+    }
+
+    Node* curr= head;
+    Node* prev = NULL;
+    int cnt =1;
+    while (curr != NULL && curr->data != value)
+    {
+       prev = curr;
+       curr = curr->next;
+       cnt++;
+    }
+
+    if (curr == NULL)
+    {
+        cout << "LInked lis bound";
+        return;
+    }
+    prev->next = curr->next;
+    if (curr->next == NULL)
+    {
+        tail = prev;
+        return;
+    }
+    delete curr;
+    
+
+    
+}
+
 int main()
 {
     Node *head = NULL;
@@ -153,6 +199,15 @@ int main()
     print(head);
 
     deleteByPosition(head, tail, 7); // Delete the tail
+    print(head); 
+       // Delete node by value
+    deleteByValue(head, tail, 20); // Delete node with value 20
+    print(head);
+
+    deleteByValue(head, tail, 300); // Delete node with value 300
+    print(head);
+
+    deleteByValue(head, tail, 1000); // Attempt to delete a non-existent value
     print(head);
 
     return 0;
